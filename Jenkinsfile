@@ -2,15 +2,16 @@ pipeline {
   agent any
   parameters {
         choice(
-            choices: 'Backend\nFrontend\nFinal',
+            choices: 'Backend\nFrontend',
             description: '',
-            name: 'stage_name')
+            name: 'Stage_Name')
     }
   stages {
     stage('Backend') {
-	  when {
-		expression { params.stage_name == 'Backend' }
-		   
+        when {
+                
+                expression { params.Stage_Name == 'Backend' }
+            }
       steps {
         parallel(
           "Backend": {
@@ -28,16 +29,15 @@ pipeline {
         )
       }
     }
-	}
     stage('Frontend') {
-	  when {
-		expression { params.stage_name == 'Frontend' }
-		
+        when {
+                
+                expression { params.Stage_Name == 'Frontend' }
+            }
       steps {
         echo 'Frontend massage'
       }
     }
-	}
     stage('Final') {
       steps {
         echo 'Final'
